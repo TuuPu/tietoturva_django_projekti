@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+<h2>Voting info</h2>
+<html lang="en-AU">
+<body>
+<form method="get">
+    <label for="query">Search: </label>
+    <input type="text" id="query" name="query" />
+    <input type="submit" value="Search" />
+</form>
+
+<span id="search-query" ></span>
+
+<script type="application/javascript">
+    var searchParams = new URLSearchParams(document.location.search);
+    if (searchParams.has("query"))
+    {
+        document.getElementById("search-query").innerHTML = "You searched for " + searchParams.get("query")
+    }
+</script>
+</body>
+</html>
+<h3>Voter info</h3>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <html lang="en-AU">
+<html>
+  <form method="get" action="{% url 'polls:ihmiset' %}">
+    <input type="text" name="first_name" />
+    <input type="submit" value="Search" />
+  </form>
+</html>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+{% endblock %}
+
+
+
+

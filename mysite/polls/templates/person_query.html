@@ -1,0 +1,26 @@
+<h3>Voter info</h3>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <html lang="en-AU">
+<html>
+  <form method="get" action="{% url 'polls:ihmiset' %}">
+    <input type="text" name="first_name" />
+    <input type="submit" value="Search" />
+  </form>
+  <table>
+    <thead>
+      <tr>
+        <th>First name</th>
+        <th>Surname</th>
+      <tr>
+    </thead>
+    <tbody>
+    {% for item in model_items %}
+      <tr>
+        <td>{{ item.first_name }}</td>
+        <td>{{ item.last_name }}</td>
+          <td>{{item.SoSec_number}}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</html>
