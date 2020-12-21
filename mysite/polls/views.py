@@ -6,7 +6,6 @@ from django.http import Http404
 from django.urls import reverse
 from django.views import generic
 from django.views.generic import TemplateView, ListView
-import urllib3
 import http.client
 import json
 
